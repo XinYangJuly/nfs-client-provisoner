@@ -1,17 +1,21 @@
 # nfs-client-provisoner
 
 一、NFS Provisioner 简介
+
 NFS Provisioner 是一个自动配置卷程序，它使用现有的和已配置的 NFS 服务器来支持通过持久卷声明动态配置 Kubernetes 持久卷。
 
 持久卷被配置为：n a m e s p a c e − {namespace}-namespace−{pvcName}-${pvName}。
 二、创建 NFS Server 端
+
 本篇幅是具体介绍如何部署 NFS 动态卷分配应用 “NFS Provisioner”，所以部署前请确认已经存在 NFS Server 端，关于如何部署 NFS Server 请看之前写过的博文 “CentOS7 搭建 NFS 服务器”，如果非 Centos 系统，请先自行查找 NFS Server 安装方法。
 
 这里 NFS Server 环境为：
 
 IP地址：10.0.0.4
 存储目录：/mnt/resource
+
 三、创建 ServiceAccount
+
 现在的 Kubernetes 集群大部分是基于 RBAC 的权限控制，所以创建一个一定权限的 ServiceAccount 与后面要创建的 “NFS Provisioner” 绑定，赋予一定的权限。
 
 提前修改里面的 Namespace 值设置为要部署 “NFS Provisioner” 的 Namespace 名
@@ -89,6 +93,7 @@ roleRef:
  kubectl apply -f nfs-rbac.yaml
 
 四、部署 NFS Provisioner
+
 设置 NFS Provisioner 部署文件，这里将其部署到 “kube-system” Namespace 中。
 nfs-provisioner-deploy.yaml
 
@@ -139,6 +144,7 @@ kubectl apply -f nfs-provisioner-deploy.yaml -n nfs-client
 
 
 五、创建 NFS SotageClass
+
 创建一个 StoageClass，声明 NFS 动态卷提供者名称为 “nfs-storage”。
 nfs-storage.yaml
 apiVersion: storage.k8s.io/v1
@@ -156,6 +162,7 @@ kubectl apply -f nfs-storage.yaml
 
 
 六、创建 PVC 和 Pod 进行测试
+
 1、创建测试 PVC
 在 “kube-public” Namespace 下创建一个测试用的 PVC 并观察是否自动创建是 PV 与其绑定。
 test-pvc.yaml
