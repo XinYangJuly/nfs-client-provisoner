@@ -22,6 +22,7 @@ IP地址：10.0.0.4
 提前修改里面的 Namespace 值设置为要部署 “NFS Provisioner” 的 Namespace 名
 
 nfs-rbac.yaml
+
 apiVersion: v1
 kind: ServiceAccount
 metadata:
