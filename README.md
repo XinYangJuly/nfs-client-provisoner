@@ -5,6 +5,7 @@
 NFS Provisioner 是一个自动配置卷程序，它使用现有的和已配置的 NFS 服务器来支持通过持久卷声明动态配置 Kubernetes 持久卷。
 
 持久卷被配置为：n a m e s p a c e − {namespace}-namespace−{pvcName}-${pvName}。
+
 二、创建 NFS Server 端
 
 本篇幅是具体介绍如何部署 NFS 动态卷分配应用 “NFS Provisioner”，所以部署前请确认已经存在 NFS Server 端，关于如何部署 NFS Server 请看之前写过的博文 “CentOS7 搭建 NFS 服务器”，如果非 Centos 系统，请先自行查找 NFS Server 安装方法。
